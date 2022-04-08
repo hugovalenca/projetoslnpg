@@ -68,5 +68,5 @@ btn_mostrar = Button(window, text="SHOW", command=clicar_btn_mostrar)
 btn_mostrar.pack()
 btn_mostrar.place(x=250, y=350)
 
-#Finalização da janela
+# Finalização da janela
 window.mainloop()
