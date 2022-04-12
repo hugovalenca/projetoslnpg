@@ -21,7 +21,7 @@ def clicar_btn_registrar():
     else:
         primeiro_album = "Não"
     dados_album = nome_album + "  " + ano_lancamento + "  " + nome_banda + "  " + primeiro_album
-    dados_album_juntos.append((nome_album, nome_banda, ano_lancamento, primeiro_album))
+    dados_album_juntos.append((nome_album, ano_lancamento, nome_banda, primeiro_album))
     catalogo_albuns.write(f'{dados_album} \n')
     catalogo_albuns.close()
 
@@ -30,11 +30,11 @@ def clicar_btn_mostrar():
     show = Toplevel()
     show.title("Music STORE, SHOW & SEARCH - Exibição")
     show.geometry("825x227")
-    colunas = ("album", "banda", "ano", "primeiro")
+    colunas = ("album", "ano", "banda", "primeiro")
     arvore = ttk.Treeview(show, columns=colunas, show='headings')
     arvore.heading('album', text='Álbum')
-    arvore.heading('banda', text='Banda/artista')
     arvore.heading('ano', text='Ano de lançamento')
+    arvore.heading('banda', text='Banda/artista')
     arvore.heading('primeiro', text='É o primeiro álbum?')
     arvore.pack()
     catalogo_albuns = open("catalogo_albuns.txt", "r", encoding="utf-8")
@@ -98,22 +98,22 @@ def clicar_btn_mostrar_selecionados():
         ano_interesse = txtbox_ano_interesse.get()
         for j in range(len(dados_album_juntos)):
             if especificacao_ano == "inferior ou igual a":
-                if dados_album_juntos[j][2] <= ano_interesse:
+                if dados_album_juntos[j][1] <= ano_interesse:
                     dados_album_juntos_selecionados.append(dados_album_juntos[j])
             elif especificacao_ano == "igual a": 
-                if dados_album_juntos[j][2] == ano_interesse:
+                if dados_album_juntos[j][1] == ano_interesse:
                     dados_album_juntos_selecionados.append(dados_album_juntos[j])
             elif especificacao_ano == "igual ou superior a":
-                if dados_album_juntos[j][2] >= ano_interesse:
+                if dados_album_juntos[j][1] >= ano_interesse:
                     dados_album_juntos_selecionados.append(dados_album_juntos[j])
     show_selected = Toplevel()
     show_selected.title("Music STORE, SHOW & SEARCH - Exibição dos selecionados")
     show_selected.geometry("825x227")
-    colunas_selecionados = ("album", "banda", "ano", "primeiro")
+    colunas_selecionados = ("album", "ano", "banda", "primeiro")
     arvore_selecionados = ttk.Treeview(show_selected, columns=colunas_selecionados, show='headings')
     arvore_selecionados.heading('album', text='Álbum')
-    arvore_selecionados.heading('banda', text='Banda/artista')
     arvore_selecionados.heading('ano', text='Ano de lançamento')
+    arvore_selecionados.heading('banda', text='Banda/artista')
     arvore_selecionados.heading('primeiro', text='É o primeiro álbum?')
     arvore_selecionados.pack()
     for dados_album in dados_album_juntos_selecionados:
